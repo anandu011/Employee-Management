@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
+import { ClickTrackingService } from './click-tracking.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,12 @@ export class EmpService {
   private isLoggedIn = false;
   employeeURL = 'http://localhost:3000/Employees';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private clickTracker: ClickTrackingService) { }
 
   login(username: string, password: string): boolean {
 
     if (username === 'a' && password === 'a') {
+      this.clickTracker.trackClick('login');
       this.isLoggedIn = true;
       return true;
     }
@@ -30,6 +32,7 @@ export class EmpService {
   }
 
   addEmployee(employee: any): Observable<any> {
+    this.clickTracker.trackClick('addEmployee');
     return this.http.post<any>(this.employeeURL, employee);
   }
 
@@ -40,6 +43,7 @@ export class EmpService {
 
 
   editEmployee(id: string, updatedData: any): Observable<any> {
-    return this.http.put(this.employeeURL, updatedData);
+    const url =`${this.employeeURL}/${id}`;
+    return this.http.put<any>(url,updatedData);
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { EmpService } from '../../services/emp.service';
 import { Router } from '@angular/router';
+import { ClickTrackingService } from 'src/app/services/click-tracking.service';
 
 @Component({
   selector: 'app-add-emp',
@@ -14,9 +15,11 @@ export class AddEmpComponent {
     department: '',
     designation: ''
   };
-
-  constructor(private empService: EmpService, private router: Router) {}
-
+  addEmpClicks: number = 0;
+  constructor(private empService: EmpService, private router: Router,private clickTrackingService: ClickTrackingService) {}
+  ngOnInit(): void {
+    this.addEmpClicks = this.clickTrackingService.getClickCount('add-emp');
+  }
   addEmployee() {
     this.empService.addEmployee(this.employee).subscribe(
       response => {

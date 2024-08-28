@@ -1,4 +1,4 @@
-<h2>Login</h2>
+<!-- <h2>Login</h2>
 <form (ngSubmit)="login()">
   <div>
     <label for="username">Username</label>
@@ -10,4 +10,26 @@
   </div>
   <button type="submit">Login</button>
 </form>
+<p>Don't have an account? <a routerLink="/auth/register">Register</a></p> -->
+
+<h2>Login</h2>
+<form (ngSubmit)="login()">
+  <div>
+    <label for="username">Username</label>
+    <input type="text" id="username" [(ngModel)]="username" name="username">
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input type="password" id="password" [(ngModel)]="password" name="password">
+  </div>
+  <button type="submit" appClickTracking="loginClick">Login</button>
+</form>
+<p>Total Login Clicks: {{ loginClicks }}</p>
+<ul>
+  <li *ngFor="let click of clickData">
+    Click {{ click.count }}: {{ click.timestamp }}
+  </li>
+</ul>
+
 <p>Don't have an account? <a routerLink="/auth/register">Register</a></p>
+

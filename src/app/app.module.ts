@@ -9,6 +9,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { EmpService } from './services/emp.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ClickTrackingDirective } from '../../src/app/directives/click-tracking.directive';
+import { ClickTrackingService } from './services/click-tracking.service';
+import { ClickReportComponent } from './click-report/click-report.component';
 
 
 @NgModule({
@@ -17,6 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LayoutComponent,
     HeaderComponent,
     SidebarComponent,
+    ClickTrackingDirective,
+    ClickReportComponent,
 
   ],
   imports: [
@@ -26,7 +31,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
     
   ],
-  providers: [EmpService],
+  providers: [EmpService,ClickTrackingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
